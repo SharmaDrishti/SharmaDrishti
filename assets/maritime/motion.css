@@ -1,0 +1,105 @@
+.swell-far { animation: tide-east 5.5s linear infinite; }
+.swell-middle { animation: tide-west 3.3s linear infinite; }
+.swell-near { animation: tide-east 2.2s linear infinite; }
+
+.cloud-one { animation: sky-current 19s linear infinite; }
+.cloud-two { animation: sky-current 24s linear -12s infinite; }
+
+.ship-entry {
+  animation: launch .9s cubic-bezier(.19, .66, .22, 1) both;
+}
+
+.ship {
+  transform-origin: 859px 439px;
+  animation: swell-rock 2.2s ease-in-out infinite;
+}
+
+.pennant { animation: cloth-in-wind 1.05s ease-in-out infinite; }
+.pennant-main { transform-origin: 862.5px 86px; }
+.pennant-aft {
+  transform-origin: 703.7px 146px;
+  animation-delay: -.28s;
+}
+.sail-light { animation: canvas-breath 2.8s ease-in-out infinite; }
+
+.memory { transform-origin: 0 0; }
+.memory.active { animation: active-memory 11s linear infinite; }
+.memory.dormant { opacity: .31; animation: dormant-memory 6.8s ease-in-out infinite; }
+.memory.recovered { opacity: .93; animation: recover-memory 6.8s ease-in-out infinite; }
+.lens-light { transform-origin: 600px 251px; animation: lens-glint 3.1s ease-in-out infinite; }
+.logline { animation: log-ink 7s linear infinite; }
+
+@keyframes tide-east {
+  from { transform: translateX(-520px); }
+  to { transform: translateX(0); }
+}
+
+@keyframes tide-west {
+  from { transform: translateX(0); }
+  to { transform: translateX(-520px); }
+}
+
+@keyframes sky-current {
+  0% { transform: translateX(-190px); opacity: 0; }
+  13%, 82% { opacity: 1; }
+  100% { transform: translateX(190px); opacity: 0; }
+}
+
+@keyframes launch {
+  0% { transform: translateY(552px); }
+  86% { transform: translateY(-9px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes swell-rock {
+  0%, 100% { transform: translateY(4px) rotate(-1.3deg); }
+  28% { transform: translateY(-8px) rotate(.65deg); }
+  57% { transform: translateY(1px) rotate(1.5deg); }
+  80% { transform: translateY(7px) rotate(-.15deg); }
+}
+
+@keyframes cloth-in-wind {
+  0%, 100% { transform: skewY(-1.3deg) scaleY(.9); }
+  48% { transform: skewY(2.5deg) scaleY(1.08); }
+  72% { transform: skewY(.4deg) scaleY(.96); }
+}
+
+@keyframes canvas-breath {
+  0%, 100% { opacity: .28; transform: translateX(-18px); }
+  51% { opacity: .72; transform: translateX(24px); }
+}
+
+@keyframes active-memory {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dormant-memory {
+  0%, 100% { opacity: .30; transform: scale(.88); }
+  43% { opacity: .21; transform: scale(.78); }
+  65% { opacity: .47; transform: scale(.96); }
+}
+
+@keyframes recover-memory {
+  0%, 100% { opacity: .92; transform: rotate(0) scale(1); }
+  29% { opacity: .43; transform: rotate(-12deg) scale(.66); }
+  70% { opacity: 1; transform: rotate(9deg) scale(1.15); }
+}
+
+@keyframes lens-glint {
+  0%, 100% { opacity: .30; transform: rotate(-11deg); }
+  50% { opacity: .86; transform: rotate(15deg); }
+}
+
+@keyframes log-ink {
+  0% { opacity: .35; stroke-dashoffset: 0; }
+  48% { opacity: .78; }
+  100% { opacity: .35; stroke-dashoffset: -44; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swell-far, .swell-middle, .swell-near, .cloud,
+  .ship-entry, .ship, .pennant, .sail-light,
+  .memory, .lens-light, .logline { animation: none; }
+  .sail-light { opacity: .2; }
+  .tracers { display: none; }
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drishti Sharma · Profile preview</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fa;
+      --panel: #ffffff;
+      --text: #1f2328;
+      --border: #d0d7de;
+      --link: #0969da;
+    }
+    body.dark {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #161b22;
+      --text: #e6edf3;
+      --border: #30363d;
+      --link: #79c0ff;
+    }
+    body {
+      margin: 0;
+      padding: 20px 16px 52px;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .toolbar {
+      width: min(100%, 908px);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    button {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      background: var(--panel);
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+    button[aria-pressed="true"] { border-color: var(--link); }
+    :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+    main {
+      box-sizing: border-box;
+      max-width: 908px;
+      margin: auto;
+      padding: clamp(12px, 3vw, 25px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    body.mobile main { max-width: 390px; padding: 12px; }
+    main p { margin: 0 0 clamp(9px, 1.8vw, 16px); }
+    main img { display: block; width: 100%; height: auto; }
+    main p > a:has(img) { display: block; border-radius: 8px; }
+    .contact { margin: 8px 0 0; text-align: center; }
+    .contact a { color: var(--link); text-underline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <header class="toolbar">
+    <strong>GitHub profile preview</strong>
+    <div class="controls">
+      <button id="replay-hero" type="button">Replay ship entrance</button>
+      <button id="view-mobile" type="button" aria-pressed="false">Mobile width</button>
+      <button id="view-dark" type="button" aria-pressed="false">Dark backdrop</button>
+    </div>
+  </header>
+  <main>
+    <p align="center">
+      <img id="profile-hero" src="./assets/maritime/intro.svg" width="890" alt="Drishti Sharma. Somewhere between art and algorithms. An illustrated ship under sail. Data Science &amp; Artificial Intelligence at Florida International University, Miami, FL." />
+    </p>
+
+    <p align="center">
+      <a id="mnemoai" href="https://github.com/drishtisharma/MnemoAI">
+        <img src="./assets/maritime/mnemoai.svg" width="890" alt="MnemoAI repository. Open-source AI memory infrastructure in development. The animated diagram shows active, dormant, and recovered memory. Focus on Python, AI infrastructure, memory systems, and information retrieval." />
+      </a>
+    </p>
+
+    <p align="center">
+      <a id="repolens" href="https://github.com/drishtisharma/RepoLens">
+        <img src="./assets/maritime/repolens.svg" width="890" alt="RepoLens repository. An AI-powered tool in development. The diagram shows a GitHub repository flowing through an AI lens into Architecture Map, Plain Walkthrough, and Visual Flow outputs. Focus on Python, React, LLMs, and generative AI." />
+      </a>
+    </p>
+
+    <p align="center">
+      <picture id="chart-layout">
+        <source media="(max-width: 540px)" srcset="./assets/maritime/technical-mobile.svg" />
+        <img src="./assets/maritime/technical.svg" width="890" alt="Technical Universe. A vertical quest map linking three islands, with areas of interest alongside. Languages and data: Python, Java, R, and SQL. Web: JavaScript, HTML &amp; CSS, and React. Version control: Git &amp; GitHub. Interests include artificial intelligence, machine learning, data science, generative AI, AI memory systems, multi-agent orchestration, and open-source development." />
+      </picture>
+    </p>
+
+    <p align="center">
+      <img src="./assets/maritime/beyond.svg" width="890" alt="Beyond the code. I study data science and AI. I also write poetry and paint. I’m drawn to where logic and creativity meet." />
+    </p>
+
+    <p class="contact" aria-label="Contact links">
+      <a href="https://www.linkedin.com/in/your-linkedin-handle">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="mailto:your.email@example.com">Email</a> &nbsp;·&nbsp;
+      <a href="https://your-portfolio-url.example.com">Portfolio</a>
+    </p>
+  </main>
+  <script>
+    const hero = document.getElementById('profile-hero');
+    const source = hero.getAttribute('src');
+    const chart = document.querySelector('#chart-layout source');
+    const phoneMedia = chart.media;
+    let replay = 0;
+
+    document.getElementById('replay-hero').addEventListener('click', () => {
+      hero.src = `${source}?replay=${++replay}`;
+    });
+
+    for (const mode of ['mobile', 'dark']) {
+      const button = document.getElementById(`view-${mode}`);
+      button.addEventListener('click', () => {
+        const enabled = document.body.classList.toggle(mode);
+        button.setAttribute('aria-pressed', String(enabled));
+        if (mode === 'mobile') chart.media = enabled ? 'all' : phoneMedia;
+      });
+    }
+  </script>
+</body>
+</html>
